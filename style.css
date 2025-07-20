@@ -4,6 +4,17 @@ body {
     margin: 20px;
     background-color: rgb(255, 211, 141);
 }
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.faceicon {
+    width: 22.6px;
+    height: 34.8px;
+}
 .toolbar {
     margin-bottom: 10px;
 }
