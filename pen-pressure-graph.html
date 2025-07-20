@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pen Pressure Graph Debug</title>
+  <style>
+    body {
+      margin: 0;
+      background: #111;
+      overflow: hidden;
+    }
+    #canvas {
+      display: block;
+      background: #000;
+    }
+    #info {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      color: #0f0;
+      font-family: monospace;
+      font-size: 14px;
+      background: rgba(0,0,0,0.6);
+      padding: 5px;
+      border-radius: 5px;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  <div id="info">Pressure: 0</div>
+
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const info = document.getElementById('info');
+    let width, height;
+    let x = 0;
+    const data = [];
+
+    function resize() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+      ctx.fillStyle = '#000';
+      ctx.fillRect(0, 0, width, height);
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    function drawGraph() {
+      ctx.fillStyle = '#000';
+      ctx.fillRect(0, 0, width, height);
+
+      ctx.beginPath();
+      ctx.moveTo(0, height);
+      for (let i = 0; i < data.length; i++) {
+        const y = height - data[i] * height;
+        ctx.lineTo(i, y);
+      }
+      ctx.strokeStyle = '#0f0';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    }
+
+    function addData(pressure) {
+      data.push(pressure);
+      if (data.length > width) data.shift();
+      drawGraph();
+    }
+
+    ["pointermove", "pointerdown"].forEach(type => {
+      document.addEventListener(type, e => {
+        if (e.pointerType === "pen" || e.pointerType === "touch" || e.pointerType === "mouse") {
+          addData(e.pressure);
+          info.textContent = `Pressure: ${e.pressure.toFixed(3)}`;
+        }
+      });
+    });
+  </script>
+</body>
+</html>

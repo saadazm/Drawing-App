@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pen Debug Overlay</title>
+  <style>
+    body {
+      margin: 0;
+      background: #111;
+      color: #0f0;
+      font-family: monospace;
+    }
+    #hud {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      background: rgba(0,0,0,0.7);
+      padding: 10px;
+      border: 1px solid #0f0;
+      border-radius: 8px;
+      font-size: 14px;
+      pointer-events: none;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="hud">Waiting for input...</div>
+
+  <script>
+    const hud = document.getElementById("hud");
+
+    function updateHUD(e) {
+      hud.innerHTML = `
+type: <b>${e.type}</b><br>
+pointerType: <b>${e.pointerType}</b><br>
+pressure: <b>${e.pressure.toFixed(3)}</b><br>
+tiltX: <b>${e.tiltX}</b><br>
+tiltY: <b>${e.tiltY}</b><br>
+twist: <b>${e.twist}</b><br>
+buttons: <b>${e.buttons}</b><br>
+width: <b>${e.width}</b><br>
+height: <b>${e.height}</b><br>
+client: <b>${e.clientX}, ${e.clientY}</b>
+      `;
+    }
+
+    ["pointerdown", "pointermove", "pointerup"].forEach(type => {
+      document.addEventListener(type, updateHUD);
+    });
+  </script>
+</body>
+</html>
