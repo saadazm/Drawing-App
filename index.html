@@ -4,21 +4,24 @@
     <meta charset="UTF-8" />
     <title>PixelSting</title>
     <link rel="stylesheet" href="style.css">
-    
+    <link href="https://fonts.googleapis.com/css?family=Fira+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Just+Me+Again+Down+Here&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Anta&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="header">
         <img src="face icon.png" alt="Icon" class="faceicon">
-        <h2>PixelSting</h2>
+        <h1>PixelSting</h1>
     </div>
-    <p>Refresh the page to get a new drawing canvas. Site is under construction</p>
+    <p style="font-family: 'Fira Mono', 'Consolas', 'Menlo', 'Monaco', 'Courier New', monospace;">
+    Refresh the page to get a new drawing canvas. Site is under construction</p>
     <div class="toolbar">
+        <input type="color" id="colorPicker" value="#ff0000">
         <button class="pushable" onclick="drawRect()"><span class="front">Rectangle </span> </button>
         <button class="pushable" onclick="drawCircle()"><span class="front">Circle</span></button>
-        <button class="pushable" onclick="activatePen()"><span class="front">Pen Tool</span></button>
+        <button class="pushable" onclick="activatePen()"><span class="front">Pen</span></button>
         <button class="pushable" onclick="undoPenStroke()"><span class="front">Undo</span></button>
-        <input type="color" id="colorPicker" value="#ff0000">
-        <button class="pushable" onclick="exportSVG()"><span class="front">Download</span></button>
+                <button class="pushable" onclick="exportSVG()"><span class="front">Download</span></button>
     </div>
     <div id="drawing"></div>
 
