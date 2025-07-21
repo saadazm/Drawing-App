@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css?family=Fira+Mono&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Just+Me+Again+Down+Here&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Anta&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="header">
@@ -16,13 +17,28 @@
     <p style="font-family: 'Fira Mono', 'Consolas', 'Menlo', 'Monaco', 'Courier New', monospace;">
     Refresh the page to get a new drawing canvas. Site is under construction</p>
     <div class="toolbar">
-        <input type="color" id="colorPicker" value="#ff0000">
-        <button class="pushable" onclick="drawRect()"><span class="front">Rectangle </span> </button>
-        <button class="pushable" onclick="drawCircle()"><span class="front">Circle</span></button>
-        <button class="pushable" onclick="activatePen()"><span class="front">Pen</span></button>
-        <button class="pushable" onclick="undoPenStroke()"><span class="front">Undo</span></button>
-                <button class="pushable" onclick="exportSVG()"><span class="front">Download</span></button>
-    </div>
+    <input type="color" id="colorPicker" value="#ff0000">
+
+    <button class="pushable" onclick="drawRect()">
+        <span class="front"><i class="fas fa-vector-square"></i> Rectangle</span>
+    </button>
+
+    <button class="pushable" onclick="drawCircle()">
+        <span class="front"><i class="fas fa-circle"></i> Circle</span>
+    </button>
+
+    <button class="pushable" onclick="activatePen()">
+        <span class="front"><i class="fas fa-pen"></i> Pen</span>
+    </button>
+
+    <button class="pushable" onclick="undoPenStroke()">
+        <span class="front"><i class="fas fa-undo"></i> Undo</span>
+    </button>
+
+    <button class="pushable" onclick="exportSVG()">
+        <span class="front"><i class="fas fa-download"></i> Download</span>
+    </button>
+</div>
     <div id="drawing"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/@svgdotjs/svg.js"></script>
