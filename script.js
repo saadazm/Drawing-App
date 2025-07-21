@@ -1,7 +1,8 @@
-const draw = SVG().addTo('#drawing').size('800', '500');
+const draw = SVG().addTo('#drawing').size('90vw', '80vh');
 let currentColor = document.getElementById("colorPicker").value;
 let isDrawing = false;
 let poly = null;
+let penStrokes = []; // Store pen stroke elements
 
 // Update color on picker change
 document.getElementById("colorPicker").addEventListener("change", e => {
@@ -59,6 +60,7 @@ function startPen(event) {
         .stroke({ color: currentColor, width: 2 });
 }
 
+
 // Draw polyline as mouse/stylus moves
 function drawPen(event) {
     event.preventDefault();
@@ -75,6 +77,7 @@ function endPen(event) {
     if (!isDrawing) return;
     isDrawing = false;
     enableRightClickDrag(poly);
+    penStrokes.push(poly); // Save the stroke for undo
     poly = null;
 }
 
@@ -94,6 +97,13 @@ function setDraggable(enabled) {
             this.off('contextmenu');
         }
     });
+}
+
+function undoPenStroke() {
+    if (penStrokes.length > 0) {
+        const lastStroke = penStrokes.pop();
+        lastStroke.remove();
+    }
 }
 
 // Custom right-click drag logic for a shape
